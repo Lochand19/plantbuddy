@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<link type="text/css" rel="stylesheet" href="styles.css" media="all" />
+<html>
+
+<head>
+
+
+
+</head>
+  
+<header>
+  <h1>
+    My Account
+  </h1>
+
+  <nav>
+    <ul>
+      <li><a href=/public_html/web104/final_project/plant_buddy/plants.html>Plants</a></li>
+      <li><a href=/public_html/web104/final_project/plant_buddy/my_garden.html>My Garden</a></li>
+      <li><a id="current" href=#>My Account</a></li>
+       <li><button id="logOut">Logout</button></li>
+    </ul>
+  </nav>
+
+</header>
+  
+<body>
+
+  <div id="app">
+    <article id="account"></article>
+    
+  </div>
+  
+</body>
+  
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+
+<script src="script2.js"></script>
+  
+  
+
+
+<script>
+  
+  //grab user details and append to account page
+  const accountDetails = document.querySelector("#account");
+  
+  const setupUI = (user) => {
+    if (user) {
+      const html = `
+<img id="photoProfile" src=${user.photoURL} alt="profile photo /">
+<p id="emailProfile">Email: ${user.email}</p>
+<p id="nameProfile">Name: ${user.displayName}</p>
+<button id="editButton" onclick="setDisplayName()">Edit</button>
+
+`;
+      accountDetails.innerHTML = html;
+    }
+  }
+  
+  var user = firebase.auth().currentUser;
+auth.onAuthStateChanged(user => {
+  if(user) {
+    setupUI(user);
+  } else {
+    console.log("no user");
+  }
+})
+  
+  </script>
+</html>
